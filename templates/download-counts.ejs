@@ -1,4 +1,4 @@
-<% if (day || week || month) { %>
+<% if (day || week || month || all) { %>
   <table class="downloads">
     <%
     var content = []
@@ -10,6 +10,9 @@
     }
     if (month && month !== '0') {
       content.push([month, ' downloads in the last month'])
+    }
+    if (all && all !== '0') {
+      content.push([all, ' downloads since creation'])
     }
     %>
     <%- content.map(function(l) {

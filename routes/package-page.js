@@ -16,10 +16,13 @@ function packagePage (req, res) {
   // TODO: Detailed analytics, maybe with some nice client-side chart
   var month = Date.now() - 1000 * 60 * 60 * 24 * 31
   var week = Date.now() - 1000 * 60 * 60 * 24 * 8
+  var begin = new Date(0)
   var end = Date.now() - 1000 * 60 * 60 * 24
+
   req.model.loadAs('downloads', 'dlDay', end, end, name, false)
   req.model.loadAs('downloads', 'dlWeek', week, end, name, false)
   req.model.loadAs('downloads', 'dlMonth', month, end, name, false)
+  req.model.loadAs('downloads', 'dlAll', begin, end, name, false)
 
   req.model.end(function (er, m) {
     if (er && er.code === 'E404') return res.error(404, er)
@@ -46,7 +49,8 @@ function packagePage (req, res) {
       title: m.package.name,
       dlDay: commaIt(m.dlDay),
       dlMonth: commaIt(m.dlMonth),
-      dlWeek: commaIt(m.dlWeek)
+      dlWeek: commaIt(m.dlWeek),
+      dlAll: commaIt(m.dlAll)
     }
     res.template("package-page.ejs", locals)
   })
