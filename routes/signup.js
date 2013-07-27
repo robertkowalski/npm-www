@@ -17,6 +17,7 @@ function show (req, res) {
     res.template('signup-form.ejs', {
       profile: m.profile,
       errors: null,
+      help: null,
       data: null
     })
   })
@@ -39,13 +40,14 @@ function handle (req, res) {
       errors.push(new Error("Passwords don't match"))
     }
 
-    //colloect other errors
+    //collect other errors
     userValidate.username(name) && errors.push(userValidate.username(name))
     userValidate.pw(password) && errors.push(userValidate.pw(password))
     userValidate.email(email) && errors.push(userValidate.email(email))
 
     if (errors && errors.length) {
       td.errors = errors
+      td.help = userValidate.requirements
       return res.template('signup-form.ejs', td, 400)
     }
 

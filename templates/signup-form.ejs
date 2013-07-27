@@ -14,6 +14,19 @@ if (errors) {
     <%
     }) %>
   </ul>
+  <p class="error">Requirements:</p>
+  <ul>
+    <%
+    Object.keys(help).forEach(function (r) {
+      if (r === 'email') return
+      Object.keys(help[r]).forEach(function (info) { %>
+        <li>
+          <p class="error"><%= help[r][info] %></p>
+        </li>
+      <%
+      })
+    }) %>
+  </ul>
   <%
 }
 %>
