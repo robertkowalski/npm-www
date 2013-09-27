@@ -38,7 +38,8 @@
     "csrf-lite": "0.1",
     "graceful-fs": "~1.2.0",
     "async-cache": "~0.1.2",
-    "npm-user-validate": "0"
+    "npm-user-validate": "0",
+    "github-url-from-git": "~1.1.1"
   },
   "bundleDependencies": [
     "request",
@@ -74,7 +75,8 @@
     "csrf-lite",
     "graceful-fs",
     "async-cache",
-    "npm-user-validate"
+    "npm-user-validate",
+    "github-url-from-git"
   ],
   "engines": {
     "node": ">=0.7.7"

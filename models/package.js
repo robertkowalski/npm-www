@@ -11,6 +11,7 @@ var LRU = require("lru-cache")
 , npm = require("npm")
 , moment = require('moment')
 , url = require('url')
+, githubUrlFromGit = require("github-url-from-git")
 
 function urlPolicy (u) {
   u = url.parse(u)
@@ -77,6 +78,14 @@ function package (params, cb) {
       data.readmeSrc = data.readme
       data.readme = parseReadme(data)
     }
+
+    if (data.repository && data.repository !== 'undefined') {
+      var gh = data.repository.url && githubUrlFromGit(data.repository.url)
+      if (gh) {
+        data.githubUrl = gh
+      }
+    }
+
     gravatarPeople(data)
     regData.set(k, data)
     return cb(null, data)
