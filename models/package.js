@@ -12,6 +12,7 @@ var LRU = require("lru-cache")
 , moment = require('moment')
 , url = require('url')
 , githubUrlFromGit = require("github-url-from-git")
+, githubUrlFromUserRepo = require("github-url-from-username-repo")
 
 function urlPolicy (u) {
   u = url.parse(u)
@@ -47,6 +48,12 @@ function package (params, cb) {
   if (version) uri += '/' + version
   npm.registry.get(uri, 600, false, true, function (er, data) {
     if (er) return cb(er)
+
+    // remove this when npm@v1.3.10 from node 0.10 is deprecated
+    // from https://github.com/isaacs/npm-www/issues/418
+    if (githubUrlFromUserRepo(data.repository.url))
+      data.repository.url = githubUrlFromUserRepo(data.repository.url)
+
     data.starredBy = Object.keys(data.users || {}).sort()
     var len = data.starredBy.length
 

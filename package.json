@@ -39,7 +39,8 @@
     "graceful-fs": "~1.2.0",
     "async-cache": "~0.1.2",
     "npm-user-validate": "0",
-    "github-url-from-git": "~1.1.1"
+    "github-url-from-git": "~1.1.1",
+    "github-url-from-username-repo": "0.0.2"
   },
   "bundleDependencies": [
     "request",
@@ -76,7 +77,8 @@
     "graceful-fs",
     "async-cache",
     "npm-user-validate",
-    "github-url-from-git"
+    "github-url-from-git",
+    "github-url-from-username-repo"
   ],
   "engines": {
     "node": ">=0.7.7"
